@@ -1,0 +1,49 @@
+Login sequencediagram:
+
+
+title Login as user
+
+actor #green:0.5 customer
+participant Login
+database #black:0.5 Users DB#blue
+customer->Login : Enter login details
+activate Login
+Login->Users DB : check login details
+deactivate Login
+activate Users DB
+Users DB ->Users DB: search in Database
+customer<--Users DB : Return result
+deactivate Users DB
+
+
+add to cart sequencediagram:
+
+
+title Add to cart
+
+actor #green:0.5 customer
+participant cartItem
+participant cart
+customer ->cartItem: select a product
+activate cartItem
+cartItem->cart:add to cart
+activate cart
+cart -->cartItem:CartId
+deactivate cart
+cartItem-->customer:CartId
+deactivate cartItem
+
+Logout sequencediagram:
+
+title logout
+
+actor #green:0.5 customer
+participant Web Application
+activate customer
+customer->Web Application:Click logout
+activate Web Application
+Web Application->Web Application:logout(token)
+Web Application-->customer:Show correct logout
+deactivateafter Web Application
+
+
