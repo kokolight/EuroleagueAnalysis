@@ -4,16 +4,18 @@ Login sequencediagram:
 title Login as user
 
 actor #green:0.5 customer
-participant Login
+participant Login form
 database #black:0.5 Users DB#blue
-customer->Login : Enter login details
-activate Login
-Login->Users DB : check login details
-deactivate Login
+customer->Login form : Enter email and password
+activate Login form
+Login form ->Login form: Validate email
+Login form->Users DB : Send credentials
 activate Users DB
 Users DB ->Users DB: search in Database
-customer<--Users DB : Return result
+Login form<--Users DB : Return result
 deactivate Users DB
+customer<--Login form : Display home page or error
+deactivate Login form
 
 
 add to cart sequencediagram:
@@ -35,15 +37,15 @@ deactivate cartItem
 
 Logout sequencediagram:
 
-title logout
+title Logout
 
 actor #green:0.5 customer
 participant Web Application
 activate customer
 customer->Web Application:Click logout
 activate Web Application
-Web Application->Web Application:logout(token)
-Web Application-->customer:Show correct logout
+Web Application->Web Application:Logout(token)
+Web Application-->customer:Show login page
 deactivateafter Web Application
 
 
