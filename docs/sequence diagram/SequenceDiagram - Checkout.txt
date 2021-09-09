@@ -1,0 +1,33 @@
+title Checkout
+
+fontawesome f2bd Buyer
+fontawesome f0e8 ProductsViewer
+fontawesome f218 ShoppingCart
+fontawesome 26df Order
+fontawesome f0d6 Payment
+
+fontawesome f1c0 Inventory DB
+activate ProductsViewer
+Buyer ->ProductsViewer: Access Inventory
+Buyer ->ShoppingCart: Access ShoppingCart
+deactivate ProductsViewer
+activate ShoppingCart
+ShoppingCart ->Order: checkout()
+deactivate ShoppingCart
+activate Order
+Order ->Payment: placeOrder()
+activate Payment
+Payment ->Payment: Wait for approval
+alt If - Payment approved
+Payment -->Order: Order status set to completed
+Order ->Inventory DB: Reduce Item from Inventory
+activate Inventory DB
+deactivateafter Inventory DB
+Order -->Buyer: Display "Purchase completed\n succesfully" Message
+Order -->Buyer: **Send order details email
+else Else - Payment timedout / not approved
+Payment -->Order: Order status set to failed
+deactivate Payment
+Order -->Buyer: Display "Purchase failed" Message
+deactivate Order
+end

@@ -1,0 +1,21 @@
+title Login as Buyer
+
+fontawesome f2bd Buyer
+fontawesome f058 Login form
+
+fontawesome f1c0 Users DB
+Buyer->Login form : Enter email and password
+activate Login form
+Login form ->Login form: Validate email
+Login form->Users DB : Send credentials
+activate Users DB
+Users DB ->Users DB: Search in Database
+Login form<--Users DB : Return result
+deactivate Users DB
+
+alt If - Credentials found
+Login form-> Buyer:ProductsViewer page
+else Else - Credentials not found
+Login form->Buyer:Error
+end
+deactivate Login form

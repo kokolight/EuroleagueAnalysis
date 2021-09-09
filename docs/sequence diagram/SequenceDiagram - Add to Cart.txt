@@ -1,0 +1,21 @@
+
+title Add to Cart
+
+fontawesome f2bd Buyer
+fontawesome f0e8 ProductsViewer
+activate ProductsViewer
+Buyer ->ProductsViewer: Access ProductsViewer
+Buyer ->ProductsViewer: Select a category
+fontawesome f290 Product
+fontawesome f218 ShoppingCart
+ProductsViewer ->Product: Display products
+deactivate ProductsViewer
+activate Product
+Buyer ->Product: Click on "Add Proudct to Cart"
+Product ->ShoppingCart :addItems()
+activate ShoppingCart
+ShoppingCart -> ShoppingCart: calculateTotal()
+ShoppingCart -->Product: Result
+deactivate ShoppingCart
+Product -->Buyer: Return result
+deactivate Product
